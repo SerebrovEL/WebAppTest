@@ -81,7 +81,7 @@
                 <configuration>
                     <httpConnector>
                         <host>localhost</host>
-                        <port>9090</port>
+                        <port>8080</port>
                     </httpConnector>
                 </configuration>
             </plugin>
