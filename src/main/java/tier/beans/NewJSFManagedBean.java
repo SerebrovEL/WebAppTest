@@ -1,7 +1,5 @@
 package tier.beans;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +7,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
-import tier.MapTrie;
+import tier.Trie;
 
 @ViewScoped
 @ManagedBean(name = "newJSFManagedBean", eager = true)
 public class NewJSFManagedBean implements Serializable {
 
-    private final MapTrie<String> mapTrie = new MapTrie<>();
+    private final Trie mapTrie = new Trie();
 
     @ManagedProperty(value = "#{hints}")
     private String hints;
@@ -69,22 +67,28 @@ public class NewJSFManagedBean implements Serializable {
     public void changeTotal1(AjaxBehaviorEvent event) {
         final List<String> words = getWords();
         words.forEach((words1) -> {
-            mapTrie.insert(words1, words1);
+            mapTrie.put(words1, words1);
         });
-        hints = "";
-        if (mapTrie.getValueSuggestions(word).isEmpty()) {
+        if (word == null) {
+            hints = "";
+            return;
+        }
+        if (word.equals("")) {
+            hints = "";
+            return;
+        }
+        if (word.isEmpty()) {
+            hints = "";
+            return;
+        }
+        if (mapTrie.contains(word)) {
+            hints = "";
+            mapTrie.get(word).forEach(element -> {
+                hints += element + "\t";
+            });
+        } else {
             hints = "";
         }
-        if (mapTrie.getValueSuggestions(word) == null) {
-            hints = "";
-        }
-        if ("".equals(word)) {
-            hints = "";
-        }
-        mapTrie.getValueSuggestions(word).forEach(element -> {
-            hints += element + "\t";
-        });
-        mapTrie.fastClear();
     }
 
     private static List<String> getWords() {
