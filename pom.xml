@@ -80,7 +80,8 @@
                 <version>${jetty-maven-plugin.version}</version>
                 <configuration>
                     <httpConnector>
-                        <port>9090</port>
+                        <host>localhost</host>
+                        <port>8080</port>
                     </httpConnector>
                 </configuration>
             </plugin>
