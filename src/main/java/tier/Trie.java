@@ -61,7 +61,6 @@ public class Trie {
             return null;
         }
         key = trimLowercaseString(key);
-
         List<String> result = new ArrayList<>();
         root.get(key).forEach(element -> {
             if (result.size() < 4) {
