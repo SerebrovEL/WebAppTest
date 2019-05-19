@@ -19,20 +19,39 @@ public class Trie {
         this.root = new HashMap<>();
     }
 
-    public void put(String Key, String Value) {
-        if (Key == null) {
+    public void put(String Word) {
+        if (Word == null) {
             return;
         }
-        Key = trimLowercaseString(Key);
+        Word = trimLowercaseString(Word);
         String c = "";
-        for (int i = 0; i < Key.length(); i++) {
-            c += Key.charAt(i);
+        for (int i = 0; i < Word.length(); i++) {
+            c += Word.charAt(i);
             if (!root.containsKey(c)) {
                 Set<String> set = new HashSet<>();
-                set.add(Value);
+                set.add(Word);
                 root.put(c, set);
             } else {
-                root.get(c).add(Value);
+                root.get(c).add(Word);
+            }
+        }
+    }
+
+    public void remove(String Word) {
+        if (Word == null) {
+            return;
+        }
+        Word = trimLowercaseString(Word);
+        String c = "";
+        for (int i = 0; i < Word.length(); i++) {
+            c += Word.charAt(i);
+            if (root.containsKey(c)) {
+                if (root.get(c).size() > 1) {
+                    root.get(c).remove(Word);
+                } else {
+                    root.get(c).remove(Word);
+                    root.remove(c);
+                }
             }
         }
     }
