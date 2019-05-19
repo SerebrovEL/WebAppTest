@@ -62,13 +62,13 @@ public class NewJSFManagedBean implements Serializable {
     public NewJSFManagedBean() {
         word = "";
         hints = "";
-    }
-
-    public void onChangeInputText() {
         final List<String> words = getWords();
         words.forEach((words1) -> {
             mapTrie.put(words1);
         });
+    }
+
+    public void onChangeInputText(AjaxBehaviorEvent event) {
         if (word == null) {
             hints = "";
             return;
