@@ -19,66 +19,51 @@ public class Trie {
         this.root = new HashMap<>();
     }
 
-    public void put(String Word) {
-        if (Word == null) {
+    public void put(String word) {
+        if (word == null) {
             return;
         }
-        Word = trimLowercaseString(Word);
-        String c = "";
-        for (int i = 0; i < Word.length(); i++) {
-            c += Word.charAt(i);
-            if (!root.containsKey(c)) {
+        word = trimLowercaseString(word);
+        String key = "";
+        for (int i = 0; i < word.length(); i++) {
+            key += word.charAt(i);
+            if (!root.containsKey(key)) {
                 Set<String> set = new HashSet<>();
-                set.add(Word);
-                root.put(c, set);
+                set.add(word);
+                root.put(key, set);
             } else {
-                root.get(c).add(Word);
+                root.get(key).add(word);
             }
         }
     }
 
-    public void remove(String Word) {
-        if (Word == null) {
+    public void remove(String word) {
+        if (word == null) {
             return;
         }
-        Word = trimLowercaseString(Word);
-        String c = "";
-        for (int i = 0; i < Word.length(); i++) {
-            c += Word.charAt(i);
-            if (root.containsKey(c)) {
-                if (root.get(c).size() > 1) {
-                    root.get(c).remove(Word);
+        word = trimLowercaseString(word);
+        String key = "";
+        for (int i = 0; i < word.length(); i++) {
+            key += word.charAt(i);
+            if (root.containsKey(key)) {
+                if (root.get(key).size() > 1) {
+                    root.get(key).remove(word);
                 } else {
-                    root.get(c).remove(Word);
-                    root.remove(c);
+                    root.get(key).remove(word);
+                    root.remove(key);
                 }
             }
         }
     }
 
-    public boolean contains(String Key) {
-        if (Key == null) {
-            return false;
-        }
-        Key = trimLowercaseString(Key);
-        String c = "";
-        for (int i = 0; i < Key.length(); i++) {
-            c += Key.charAt(i);
-            if (!root.containsKey(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public List<String> get(String Key) {
-        if (Key == null) {
+    public List<String> get(String key) {
+        if (key == null) {
             return null;
         }
-        Key = trimLowercaseString(Key);
+        key = trimLowercaseString(key);
 
         List<String> result = new ArrayList<>();
-        root.get(Key).forEach(element -> {
+        root.get(key).forEach(element -> {
             if (result.size() < 4) {
                 result.add(element);
             }
@@ -86,7 +71,22 @@ public class Trie {
         return result;
     }
 
-    protected String trimLowercaseString(String key) {
-        return key.toLowerCase().trim();
+    public boolean contains(String word) {
+        if (word == null) {
+            return false;
+        }
+        word = trimLowercaseString(word);
+        String key = "";
+        for (int i = 0; i < word.length(); i++) {
+            key += word.charAt(i);
+            if (!root.containsKey(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected String trimLowercaseString(String word) {
+        return word.toLowerCase().trim();
     }
 }
