@@ -64,7 +64,7 @@ public class NewJSFManagedBean implements Serializable {
         hints = "";
     }
 
-    public void changeTotal1(AjaxBehaviorEvent event) {
+    public void onChangeInputText() {
         final List<String> words = getWords();
         words.forEach((words1) -> {
             mapTrie.put(words1);

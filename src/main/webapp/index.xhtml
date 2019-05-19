@@ -13,7 +13,7 @@
                 <p:outputLabel id="out" value="#{newJSFManagedBean.hints}" />
                 <p:outputLabel value="Задайте имя на: " />
                 <p:inputText id="words" value="#{newJSFManagedBean.word}">
-                    <p:ajax event="keyup" update="out" listener="#{newJSFManagedBean.changeTotal1}" />
+                    <p:ajax event="keyup" update="out" listener="#{newJSFManagedBean.onChangeInputText}" />
                 </p:inputText>
             </p:panelGrid>
         </h:form>
