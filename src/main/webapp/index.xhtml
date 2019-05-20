@@ -11,7 +11,7 @@
             <p:panelGrid columns="2">
                 <p:outputLabel value="Подсказка (варианты имен): " />
                 <p:outputLabel id="out" value="#{newJSFManagedBean.hints}" />
-                <p:outputLabel value="Задайте имя на: " />
+                <p:outputLabel value="Задайте имя: " />
                 <p:inputText id="words" value="#{newJSFManagedBean.word}">
                     <p:ajax event="keyup" update="out" listener="#{newJSFManagedBean.onChangeInputText}" />
                 </p:inputText>
