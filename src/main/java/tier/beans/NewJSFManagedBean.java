@@ -69,15 +69,7 @@ public class NewJSFManagedBean implements Serializable {
     }
 
     public void onChangeInputText(AjaxBehaviorEvent event) {
-        if (word == null) {
-            hints = "";
-            return;
-        }
-        if (word.equals("")) {
-            hints = "";
-            return;
-        }
-        if (word.isEmpty()) {
+        if (word == null or word.equals("") or word.isEmpty()) {
             hints = "";
             return;
         }
